@@ -1,448 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Echoes of a Forgotten Event</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at center, #202020 0%, #090909 75%);
-      color: #d8d8d8;
-      font-family: Georgia, serif;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.08;
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 3px,
-          #ffffff 4px
-        );
-      z-index: 10;
-    }
-
-    .container {
-      max-width: 1050px;
-      margin: auto;
-      padding: 40px 24px 80px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    h1 {
-      color: #eee;
-      letter-spacing: 5px;
-      font-size: clamp(2rem, 6vw, 4.5rem);
-      text-transform: uppercase;
-      text-shadow:
-        2px 0 #7b1e1e,
-        -2px 0 #263b65;
-      animation: flicker 5s infinite;
-    }
-
-    .subtitle {
-      color: #9c9c9c;
-      font-style: italic;
-    }
-
-    .instructions {
-      margin: 25px auto;
-      max-width: 650px;
-      border-left: 2px solid #8b2525;
-      padding: 14px 18px;
-      color: #aaa;
-      line-height: 1.6;
-      background: rgba(255,255,255,0.03);
-    }
-
-    #poem {
-      position: relative;
-      min-height: 570px;
-      padding: 35px;
-      border: 1px solid #333;
-      background: rgba(0, 0, 0, 0.45);
-      box-shadow: 0 0 45px rgba(0,0,0,0.8);
-      overflow: hidden;
-    }
-
-    .fragment {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 16px;
-      color: #d5d5d5;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid #444;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .fragment:hover {
-      color: #fff;
-      border-color: #a92c2c;
-      background: rgba(142, 27, 27, 0.2);
-      transform: rotate(-1deg) scale(1.04);
-    }
-
-    .fragment.revealed {
-      color: #f0caca;
-      border-color: #762020;
-      box-shadow: 0 0 14px rgba(154, 32, 32, 0.35);
-    }
-
-    .fragment.revealed::after {
-      content: "memory recovered";
-      position: absolute;
-      font-family: monospace;
-      font-size: 0.6rem;
-      color: #864343;
-      right: 5px;
-      bottom: -14px;
-      opacity: 0.8;
-    }
-
-    .memory {
-      display: none;
-      margin-top: 12px;
-      color: #bababa;
-      font-size: 0.92rem;
-      line-height: 1.5;
-      max-width: 370px;
-    }
-
-    .revealed .memory {
-      display: block;
-      animation: appear 1s ease;
-    }
-
-    .fragment:nth-child(2n) {
-      transform: translateY(18px) rotate(1deg);
-    }
-
-    .fragment:nth-child(3n) {
-      transform: translateY(-12px) rotate(-2deg);
-    }
-
-    .fragment:nth-child(5n) {
-      opacity: 0.72;
-    }
-
-    .final {
-      display: none;
-      margin: 45px auto 10px;
-      max-width: 700px;
-      padding: 28px;
-      border-top: 1px solid #702323;
-      border-bottom: 1px solid #702323;
-      text-align: center;
-      color: #dfbaba;
-      line-height: 1.9;
-      font-size: 1.12rem;
-      animation: appear 2s ease;
-    }
-
-    .final.visible {
-      display: block;
-    }
-
-    button {
-      margin: 10px 5px;
-      padding: 10px 16px;
-      color: #ddd;
-      background: #171717;
-      border: 1px solid #555;
-      cursor: pointer;
-      font-family: monospace;
-    }
-
-    button:hover {
-      background: #762020;
-      border-color: #bd4b4b;
-    }
-
-    #progress {
-      text-align: center;
-      color: #888;
-      font-family: monospace;
-      margin: 20px;
-    }
-
-    @keyframes flicker {
-      0%, 18%, 22%, 63%, 65%, 100% {
-        opacity: 1;
-      }
-      20%, 64% {
-        opacity: 0.45;
-      }
-    }
-
-    @keyframes appear {
-      from {
-        opacity: 0;
-        filter: blur(8px);
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        filter: blur(0);
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      #poem {
-        padding: 18px;
-      }
-
-      .fragment {
-        margin: 8px 2px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Echoes of a Forgotten Event</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at center,#202020 0%,#090909 75%);color:#d8d8d8;font-family:Georgia,serif;overflow-x:hidden}
+body.done{background:radial-gradient(circle at center,#3b1717 0%,#090909 78%)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,#fff 4px);z-index:10}
+.container{max-width:980px;margin:auto;padding:36px 20px 70px}
+header{text-align:center;margin-bottom:22px}
+h1{color:#eee;letter-spacing:5px;font-size:clamp(1.8rem,6vw,4rem);text-transform:uppercase;text-shadow:2px 0 #7b1e1e,-2px 0 #263b65;animation:flicker 5s infinite;margin:0 0 10px}
+.subtitle{color:#9c9c9c;font-style:italic;margin:0}
+.instructions{margin:20px auto;max-width:640px;border-left:2px solid #8b2525;padding:12px 16px;color:#aaa;line-height:1.6;background:rgba(255,255,255,.03)}
+#room{border:1px solid #333;box-shadow:0 0 45px rgba(0,0,0,.8);background:#000;transition:box-shadow 2s}
+.done #room{box-shadow:0 0 60px rgba(140,30,30,.6)}
+svg{display:block;width:100%;height:auto}
+.obj{cursor:pointer;opacity:.5;transition:opacity .4s,filter .4s}
+.obj:hover{opacity:.95;filter:drop-shadow(0 0 5px #fff)}
+.obj.revealed{opacity:1;filter:drop-shadow(0 0 7px #b33)}
+.hit{fill:transparent}
+.ash{animation:fall 3s linear infinite}
+@keyframes fall{from{transform:translateY(0)}to{transform:translateY(150px)}}
+#panel{min-height:120px;margin:18px auto;max-width:700px;padding:18px 22px;border:1px solid #333;background:rgba(0,0,0,.45);text-align:center;line-height:1.7}
+#panel h3{margin:0 0 8px;color:#f0caca;font-style:italic;font-weight:normal;font-size:1.2rem}
+#panel p{margin:0;color:#bababa}
+.final{display:none;margin:30px auto;max-width:700px;padding:26px;border-top:1px solid #702323;border-bottom:1px solid #702323;text-align:center;color:#dfbaba;line-height:1.9;font-size:1.1rem}
+.final.visible{display:block;animation:appear 2s ease}
+button{margin:8px 5px;padding:10px 16px;color:#ddd;background:#171717;border:1px solid #555;cursor:pointer;font-family:monospace}
+button:hover{background:#762020;border-color:#bd4b4b}
+#progress{text-align:center;color:#888;font-family:monospace;margin:14px}
+.controls{text-align:center}
+@keyframes flicker{0%,18%,22%,63%,65%,100%{opacity:1}20%,64%{opacity:.45}}
+@keyframes appear{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:blur(0)}}
+</style>
 </head>
-
 <body>
-  <div class="container">
+<div class="container">
+<header>
+<h1>Echoes of a Forgotten Event</h1>
+<p class="subtitle">A memory does not disappear. It changes rooms.</p>
+</header>
+<div class="instructions">You are standing in the room. Every object in it is a fragment. Click them in any order to hear them and bring their memories back.</div>
 
-    <header>
-      <h1>Echoes of a Forgotten Event</h1>
-      <p class="subtitle">A memory does not disappear. It changes rooms.</p>
-    </header>
+<div id="room">
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A dim room full of objects">
+<defs>
+<radialGradient id="glow"><stop offset="0" stop-color="#bfe8ff"/><stop offset="1" stop-color="#bfe8ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".8"/></radialGradient>
+</defs>
+<rect width="800" height="340" fill="#1c1917"/>
+<rect y="340" width="800" height="160" fill="#14100d"/>
+<rect y="336" width="800" height="6" fill="#0c0908"/>
+<g stroke="#1a1512"><line x1="0" y1="380" x2="800" y2="380"/><line x1="0" y1="430" x2="800" y2="430"/></g>
 
-    <div class="instructions">
-      Click the fragments in any order. Some memories contradict one another.
-      Some have been waiting longer than others to be heard.
-    </div>
+<!-- carpet with glass -->
+<g class="obj" data-i="2"><title>glass beneath the carpet</title>
+<polygon class="hit" points="220,395 620,395 660,485 180,485" fill="#2b1a1a"/>
+<polygon points="220,395 620,395 660,485 180,485" fill="#2b1a1a" stroke="#4a2a2a"/>
+<g fill="#cfe6ff"><polygon points="300,420 310,410 315,424"/><polygon points="400,440 412,430 418,446"/><polygon points="480,415 488,407 496,418"/><polygon points="360,465 366,458 374,468"/><polygon points="560,450 566,442 574,454"/></g></g>
 
-    <div id="poem">
+<!-- fridge -->
+<g class="obj" data-i="1"><title>someone was singing</title>
+<rect class="hit" x="20" y="120" width="80" height="220"/>
+<rect x="20" y="120" width="80" height="220" fill="#2b2b2b" stroke="#777" stroke-width="2"/><line x1="20" y1="205" x2="100" y2="205" stroke="#777"/>
+<rect x="88" y="145" width="5" height="40" fill="#999"/><rect x="88" y="220" width="5" height="60" fill="#999"/></g>
 
-      <span class="fragment">
-        the clock said 3:17
-        <span class="memory">
-          Or perhaps it stopped there.  
-          The hands were trembling, but the room was not.
-        </span>
-      </span>
+<!-- window -->
+<g class="obj" data-i="8"><title>rain against the window</title>
+<rect class="hit" x="130" y="60" width="130" height="160"/>
+<rect x="130" y="60" width="130" height="160" fill="#151a20" stroke="#888" stroke-width="5"/>
+<line x1="195" y1="60" x2="195" y2="220" stroke="#888" stroke-width="3"/><line x1="130" y1="140" x2="260" y2="140" stroke="#888" stroke-width="3"/>
+<g fill="#aaa"><circle class="ash" cx="150" cy="70" r="2.5"/><circle class="ash" cx="175" cy="60" r="2" style="animation-delay:-1s"/><circle class="ash" cx="215" cy="66" r="3" style="animation-delay:-2s"/><circle class="ash" cx="240" cy="62" r="2" style="animation-delay:-.5s"/><circle class="ash" cx="165" cy="90" r="2" style="animation-delay:-2.4s"/><circle class="ash" cx="225" cy="80" r="2.5" style="animation-delay:-1.5s"/></g></g>
 
-      <span class="fragment">
-        someone was singing
-        <span class="memory">
-          A birthday song—  
-          no, a hymn—  
-          no, only the refrigerator trying to live.
-        </span>
-      </span>
+<!-- coat -->
+<g class="obj" data-i="3"><title>your red coat</title>
+<rect class="hit" x="270" y="150" width="80" height="190"/>
+<line x1="310" y1="150" x2="310" y2="336" stroke="#5a4636" stroke-width="5"/><ellipse cx="310" cy="336" rx="26" ry="6" fill="#3a2c20"/>
+<path d="M295 165 L310 158 L325 165 L347 197 L334 204 L328 196 L328 268 L292 268 L292 196 L286 204 L273 197 Z" fill="#8b1a1a" stroke="#c33"/>
+<line x1="310" y1="160" x2="310" y2="268" stroke="#5a0f0f" stroke-width="2"/></g>
 
-      <span class="fragment">
-        glass beneath the carpet
-        <span class="memory">
-          Small stars in the floorboards.  
-          We stepped around them because the house was still asleep.
-        </span>
-      </span>
+<!-- clock -->
+<g class="obj" data-i="0"><title>the clock said 3:17</title>
+<circle class="hit" cx="420" cy="90" r="40"/>
+<circle cx="420" cy="90" r="38" fill="#1a1a1a" stroke="#aaa" stroke-width="4"/>
+<line x1="420" y1="90" x2="451" y2="97" stroke="#ddd" stroke-width="3"/><line x1="420" y1="90" x2="440" y2="93" stroke="#c44" stroke-width="4"/><circle cx="420" cy="90" r="3" fill="#ddd"/></g>
 
-      <span class="fragment">
-        your red coat
-        <span class="memory">
-          You wore it in summer.  
-          You wore it in the photograph.  
-          You wore it when they told me not to look.
-        </span>
-      </span>
+<!-- photograph -->
+<g class="obj" data-i="10"><title>the photograph was burned</title>
+<rect class="hit" x="500" y="70" width="70" height="72"/>
+<rect x="500" y="70" width="70" height="72" fill="#3a2a1a" stroke="#6b4a30" stroke-width="3"/><rect x="507" y="77" width="56" height="58" fill="#c9bda5"/>
+<path d="M507 77h30q-8 16-20 20t-10 38h-0z" fill="#1a0f0a"/><path d="M563 135h-30q14-8 22-22t8-36z" fill="#1a0f0a"/>
+<circle cx="548" cy="100" r="9" fill="#efe4d0"/></g>
 
-      <span class="fragment">
-        the door would not open
-        <span class="memory">
-          I pulled until my palms became two open mouths.  
-          On the other side, someone whispered my name.
-        </span>
-      </span>
+<!-- name plate -->
+<g class="obj" data-i="9"><title>do not say the name</title>
+<rect class="hit" x="525" y="180" width="50" height="60"/>
+<rect x="525" y="180" width="50" height="60" fill="#1a1a1a" stroke="#666"/><text x="550" y="222" fill="#a33" font-size="36" text-anchor="middle" font-family="Georgia">?</text></g>
 
-      <span class="fragment">
-        a light under the water
-        <span class="memory">
-          Or under the bed.  
-          Or behind my eyelids.  
-          Memory has no architecture—only exits.
-        </span>
-      </span>
+<!-- door -->
+<g class="obj" data-i="4"><title>the door would not open</title>
+<rect class="hit" x="630" y="60" width="110" height="285"/>
+<rect x="630" y="60" width="110" height="280" fill="#2a1d14" stroke="#6b4a30" stroke-width="3"/>
+<rect x="645" y="80" width="35" height="80" fill="none" stroke="#4a3320"/><rect x="690" y="80" width="35" height="80" fill="none" stroke="#4a3320"/>
+<rect x="645" y="185" width="80" height="120" fill="none" stroke="#4a3320"/><circle cx="722" cy="225" r="6" fill="#c9a24a"/>
+<rect x="631" y="336" width="108" height="5" fill="#ffd9a0" opacity=".9"/></g>
 
-      <span class="fragment">
-        the telephone kept ringing
-        <span class="memory">
-          Nobody answered.  
-          Later, someone said it had never rung at all.
-        </span>
-      </span>
+<!-- phone on table -->
+<g class="obj" data-i="6"><title>the telephone kept ringing</title>
+<rect class="hit" x="340" y="235" width="150" height="105"/>
+<rect x="355" y="290" width="120" height="8" fill="#4a3320"/><line x1="365" y1="298" x2="365" y2="338" stroke="#4a3320" stroke-width="5"/><line x1="465" y1="298" x2="465" y2="338" stroke="#4a3320" stroke-width="5"/>
+<rect x="385" y="268" width="60" height="22" rx="7" fill="#222" stroke="#888"/><rect x="380" y="255" width="70" height="13" rx="6" fill="#333" stroke="#999"/>
+<g fill="none" stroke="#c44" stroke-width="2"><path d="M362 252q-10 8 0 16"/><path d="M352 246q-16 14 0 28"/><path d="M468 252q10 8 0 16"/><path d="M478 246q16 14 0 28"/></g></g>
 
-      <span class="fragment">
-        one shoe in the hallway
-        <span class="memory">
-          Mine was beside it.  
-          Yours was missing.  
-          This is the part I have carried incorrectly.
-        </span>
-      </span>
+<!-- water with light -->
+<g class="obj" data-i="5"><title>a light under the water</title>
+<ellipse class="hit" cx="115" cy="435" rx="60" ry="24"/>
+<ellipse cx="115" cy="435" rx="55" ry="17" fill="#0d2233" stroke="#5fa0c8" stroke-width="2"/><circle cx="115" cy="437" r="28" fill="url(#glow)"/>
+<path d="M75 432q10-5 20 0t20 0 20 0 20 0" fill="none" stroke="#8fd0f0" opacity=".6"/></g>
 
-      <span class="fragment">
-        rain against the window
-        <span class="memory">
-          It was not rain.  
-          It was ash, softening as it fell.
-        </span>
-      </span>
+<!-- shoe -->
+<g class="obj" data-i="7"><title>one shoe in the hallway</title>
+<rect class="hit" x="500" y="425" width="170" height="55"/>
+<path d="M505 470q0-28 22-28l14 10h26q12 0 12 18z" fill="#3a3a44" stroke="#999"/>
+<path d="M600 474q0-28 22-28l14 10h26q12 0 12 18z" fill="none" stroke="#777" stroke-dasharray="4 4"/></g>
 
-      <span class="fragment">
-        do not say the name
-        <span class="memory">
-          Names are doors.  
-          I have spent years standing in front of yours.
-        </span>
-      </span>
+<!-- silence rings -->
+<g class="obj" data-i="11"><title>I remember the silence</title>
+<circle class="hit" cx="430" cy="190" r="46"/>
+<g fill="none" stroke="#888"><circle cx="430" cy="190" r="8"/><circle cx="430" cy="190" r="22" opacity=".7"/><circle cx="430" cy="190" r="36" opacity=".45"/></g></g>
 
-      <span class="fragment">
-        the photograph was burned
-        <span class="memory">
-          Still, your face survived in the corner—  
-          a pale interruption,  
-          proof that fire also forgets.
-        </span>
-      </span>
+<rect width="800" height="500" fill="url(#vig)" pointer-events="none"/>
+</svg>
+</div>
 
-      <span class="fragment">
-        I remember the silence
-        <span class="memory">
-          Not before.  
-          Not after.  
-          Only the exact moment the world became careful.
-        </span>
-      </span>
+<div id="panel"><p>Something in this room remembers. Click an object.</p></div>
+<div id="finalMemory" class="final">I remember now.<br><br>
+It was not the house that broke.<br>It was the night inside us.<br><br>
+At 3:17, the call came.<br>At 3:18, you were gone.<br>At 3:19, I learned how quickly a family<br>can turn a tragedy into a locked room.<br><br>
+Years later, I still hear the door.<br>Years later, I still reach for the handle.<br><br>
+And every time the clock forgets to move,<br>your red coat crosses the hallway&mdash;<br>carrying the weather of that night<br>back into me.</div>
+<div id="progress">Memories recovered: 0 / 12</div>
+<div class="controls">
+<button id="ambBtn">Play Memory Soundscape</button>
+<button id="muteBtn">Fragment sounds: on</button>
+<button id="resetBtn">Erase and Begin Again</button>
+</div>
+</div>
+<script>
+const M=[
+["the clock said 3:17","Or perhaps it stopped there.<br>The hands were trembling, but the room was not."],
+["someone was singing","A birthday song&mdash;<br>no, a hymn&mdash;<br>no, only the refrigerator trying to live."],
+["glass beneath the carpet","Small stars in the floorboards.<br>We stepped around them because the house was still asleep."],
+["your red coat","You wore it in summer.<br>You wore it in the photograph.<br>You wore it when they told me not to look."],
+["the door would not open","I pulled until my palms became two open mouths.<br>On the other side, someone whispered my name."],
+["a light under the water","Or under the bed.<br>Or behind my eyelids.<br>Memory has no architecture&mdash;only exits."],
+["the telephone kept ringing","Nobody answered.<br>Later, someone said it had never rung at all."],
+["one shoe in the hallway","Mine was beside it.<br>Yours was missing.<br>This is the part I have carried incorrectly."],
+["rain against the window","It was not rain.<br>It was ash, softening as it fell."],
+["do not say the name","Names are doors.<br>I have spent years standing in front of yours."],
+["the photograph was burned","Still, your face survived in the corner&mdash;<br>a pale interruption,<br>proof that fire also forgets."],
+["I remember the silence","Not before.<br>Not after.<br>Only the exact moment the world became careful."]
+];
+let ac=null,master=null,sfxOn=true,amb=null;
+function ctx(){if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();master=ac.createGain();master.gain.value=.8;master.connect(ac.destination);}if(ac.state==='suspended')ac.resume();return ac;}
+function tone(f,type,t0,dur,vol,f2){const a=ctx(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime+t0;o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+Math.min(.05,dur/3));g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.05);}
+function noise(t0,dur,ft,fr,vol,q){const a=ctx(),n=a.sampleRate*dur,b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;const s=a.createBufferSource();s.buffer=b;const fl=a.createBiquadFilter();fl.type=ft;fl.frequency.value=fr;fl.Q.value=q||1;const g=a.createGain(),t=a.currentTime+t0;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+dur*.3);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(fl);fl.connect(g);g.connect(master);s.start(t);}
+const SFX=[
+()=>{for(let i=0;i<6;i++){tone(1800,'square',i*.5,.03,.05);tone(1200,'square',i*.5+.25,.03,.03);}},
+()=>{[392,440,349,330,392,294].forEach((f,i)=>tone(f,'sine',i*.45,.6,.12));},
+()=>{for(let i=0;i<10;i++)tone(2500+Math.random()*3500,'sine',i*.12+Math.random()*.1,.35,.05);},
+()=>{noise(0,1.6,'lowpass',500,.25,.5);tone(110,'triangle',0,1.8,.08);},
+()=>{tone(90,'sawtooth',0,1.8,.07,220);tone(95,'sawtooth',.2,1.6,.05,260);noise(0,1.6,'bandpass',700,.05,4);},
+()=>{for(let i=0;i<9;i++){const f=300+Math.random()*300;tone(f,'sine',i*.2,.25,.09,f*1.8);}tone(70,'sine',0,2,.1);},
+()=>{for(let i=0;i<4;i++){[0,.4].forEach(o=>{tone(440,'sine',i*.9+o,.35,.1);tone(480,'sine',i*.9+o,.35,.1);});}},
+()=>{for(let i=0;i<4;i++){tone(90,'sine',i*.6,.18,.3,45);noise(i*.6,.1,'lowpass',400,.15);}},
+()=>noise(0,3,'highpass',3000,.12,.7),
+()=>{noise(0,1.2,'bandpass',1800,.09,6);noise(1.2,1.2,'bandpass',2200,.07,6);tone(60,'sine',0,2.4,.05);},
+()=>{noise(0,2.5,'lowpass',400,.08);for(let i=0;i<30;i++)noise(Math.random()*2.5,.03,'highpass',2000,.15);},
+()=>{tone(55,'sine',0,3.5,.14);tone(58,'sine',0,3.5,.1);}
+];
+function startAmb(){if(amb)return;const a=ctx();amb=[];[55,82.41,110].forEach((f,i)=>{const o=a.createOscillator(),g=a.createGain();o.type=i?'triangle':'sine';o.frequency.value=f;g.gain.value=i?.018:.035;o.connect(g);g.connect(master);o.start();amb.push({o,g});});document.getElementById('ambBtn').textContent='Stop Soundscape';}
+function stopAmb(){if(!amb)return;const t=ac.currentTime;amb.forEach(({o,g})=>{g.gain.setTargetAtTime(.0001,t,.3);o.stop(t+1.5);});amb=null;document.getElementById('ambBtn').textContent='Play Memory Soundscape';}
 
-      <div id="finalMemory" class="final">
-        I remember now.<br><br>
-
-        It was not the house that broke.<br>
-        It was the night inside us.<br><br>
-
-        At 3:17, the call came.<br>
-        At 3:18, you were gone.<br>
-        At 3:19, I learned how quickly a family<br>
-        can turn a tragedy into a locked room.<br><br>
-
-        Years later, I still hear the door.<br>
-        Years later, I still reach for the handle.<br><br>
-
-        And every time the clock forgets to move,<br>
-        your red coat crosses the hallway—<br>
-        carrying the weather of that night<br>
-        back into me.
-      </div>
-    </div>
-
-    <div id="progress">Memories recovered: 0 / 12</div>
-
-    <div style="text-align:center;">
-      <button onclick="startSound()">Play Memory Soundscape</button>
-      <button onclick="stopSound()">Stop Soundscape</button>
-      <button onclick="resetPoem()">Erase and Begin Again</button>
-    </div>
-  </div>
-
-  <script>
-    const fragments = document.querySelectorAll(".fragment");
-    const progress = document.getElementById("progress");
-    const finalMemory = document.getElementById("finalMemory");
-
-    let recovered = 0;
-    let audioContext;
-    let oscillators = [];
-
-    fragments.forEach(fragment => {
-      fragment.addEventListener("click", () => {
-        if (!fragment.classList.contains("revealed")) {
-          fragment.classList.add("revealed");
-          recovered++;
-
-          progress.textContent =
-            `Memories recovered: ${recovered} / ${fragments.length}`;
-
-          if (recovered === fragments.length) {
-            finalMemory.classList.add("visible");
-            document.body.style.background =
-              "radial-gradient(circle at center, #3b1717 0%, #090909 78%)";
-          }
-        }
-      });
-    });
-
-    function resetPoem() {
-      fragments.forEach(fragment => {
-        fragment.classList.remove("revealed");
-      });
-
-      recovered = 0;
-      progress.textContent = "Memories recovered: 0 / 12";
-      finalMemory.classList.remove("visible");
-
-      document.body.style.background =
-        "radial-gradient(circle at center, #202020 0%, #090909 75%)";
-    }
-
-    function startSound() {
-      if (audioContext) return;
-
-      audioContext = new (window.AudioContext ||
-        window.webkitAudioContext)();
-
-      const frequencies = [55, 82.41, 110];
-
-      frequencies.forEach((frequency, index) => {
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-
-        oscillator.type = index === 0 ? "sine" : "triangle";
-        oscillator.frequency.value = frequency;
-        gain.gain.value = index === 0 ? 0.035 : 0.018;
-
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
-        oscillator.start();
-
-        oscillators.push({ oscillator, gain });
-      });
-    }
-
-    function stopSound() {
-      oscillators.forEach(({ oscillator, gain }) => {
-        gain.gain.exponentialRampToValueAtTime(
-          0.001,
-          audioContext.currentTime + 1
-        );
-
-        oscillator.stop(audioContext.currentTime + 1);
-      });
-
-      oscillators = [];
-      audioContext = null;
-    }
-  </script>
+const objs=document.querySelectorAll('.obj'),panel=document.getElementById('panel'),prog=document.getElementById('progress'),fin=document.getElementById('finalMemory');
+let n=0;
+objs.forEach(o=>o.addEventListener('click',()=>{
+  const i=+o.dataset.i;
+  if(sfxOn)SFX[i]();
+  panel.innerHTML='<h3>'+M[i][0]+'</h3><p>'+M[i][1]+'</p>';
+  if(o.classList.contains('revealed'))return;
+  o.classList.add('revealed');n++;
+  prog.textContent='Memories recovered: '+n+' / 12';
+  if(n===12){fin.classList.add('visible');document.body.classList.add('done');fin.scrollIntoView({behavior:'smooth',block:'center'});}
+}));
+document.getElementById('ambBtn').onclick=()=>amb?stopAmb():startAmb();
+document.getElementById('muteBtn').onclick=e=>{sfxOn=!sfxOn;e.target.textContent='Fragment sounds: '+(sfxOn?'on':'off');};
+document.getElementById('resetBtn').onclick=()=>{objs.forEach(o=>o.classList.remove('revealed'));n=0;prog.textContent='Memories recovered: 0 / 12';fin.classList.remove('visible');document.body.classList.remove('done');panel.innerHTML='<p>Something in this room remembers. Click an object.</p>';};
+</script>
 </body>
 </html>
